@@ -1,0 +1,19 @@
+name: peer-sessions
+label: Peer Sessions
+kind: standalone
+version: 0.1.0
+author: Turgut Kural
+license: MIT
+homepage: https://github.com/TurgutKural/peer-sessions
+description: >
+  Open sessions of one profile message each other, like Claude Code teammates. The
+  `peer_message` tool lists open sessions and sends one (or all) a message; a busy
+  recipient gets it after its next tool call, an idle one starts a turn with it, a closed
+  one gets it when it is opened. Sessions that were already open use
+  `hermes peer-sessions send` from their terminal. Messages arrive framed as a peer's
+  input, never as the user's. Waking idle sessions needs
+  plugins.entries.peer-sessions.allow_gateway_injection.
+requires_hermes: ">=0.22.5"
+tags: [sessions, multi-agent, messaging]
+provides_tools: [peer_message]
+provides_hooks: [transform_tool_result, pre_llm_call, on_session_end]
