@@ -48,7 +48,7 @@ def test_hooks_deliver_in_a_process_that_cannot_wake(core, home, injector, make)
     home.set_busy("local-bbb222")
     sender = make(local=False, remote=False)
     out = sender.send("local-aaa111", "mmdh3", "x")
-    assert out["status"] == "queued"                             # nobody ticked: honest answer
+    assert out["status"] == "queued" and out["to"] == "mmdh3"     # nobody ticked: honest answer
     assert len(sender.deliverer.take("local-bbb222")) == 1
 
 

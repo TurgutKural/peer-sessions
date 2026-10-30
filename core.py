@@ -672,7 +672,8 @@ class PeerService:
             if self.deliverer is not None:
                 self.deliverer.poke()
             outcome = self._await_status(msg["id"])
-        return {"ok": outcome.get("status") not in ("rejected", "expired"), "id": msg["id"], **outcome}
+        return {"ok": outcome.get("status") not in ("rejected", "expired"), "id": msg["id"],
+                "to": msg["to_name"], "to_id": to_id, **outcome}
 
     def _await_status(self, msg_id: str) -> dict:
         deadline = time.monotonic() + CLI_WAIT_S
